@@ -26,7 +26,8 @@
         "php-http/guzzle6-adapter": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan": "^0.12.50",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^8.0",
+        "php-http/message-factory": "^1.1"
     },
     "autoload": {
         "psr-4": {

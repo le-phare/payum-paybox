@@ -22,7 +22,7 @@ class ApiLoggerAwareAction implements ApiAwareInterface, LoggerAwareInterface
         $this->apiClass = Api::class;
     }
 
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->api->setLogger($logger);
         $this->logger = $logger;
