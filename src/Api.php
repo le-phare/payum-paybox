@@ -226,7 +226,7 @@ class Api implements LoggerAwareInterface
     /**
      * @return bool
      */
-    private function checkPayboxSignature(GetHttpRequest $httpRequest)
+    private function checkPayboxSignature(GetHttpRequest $httpRequest): bool
     {
         if (false === isset($httpRequest->query['signature'])) {
             $this->logger->critical('checkPayboxSignature: query parameter \'signature\' not set', [
@@ -321,5 +321,7 @@ class Api implements LoggerAwareInterface
 
             return false;
         }
+
+        return false;
     }
 }
