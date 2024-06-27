@@ -47,10 +47,9 @@ class NotifyActionTest extends GenericActionTest
     }
 
     /**
-     * @test
      * @covers \Marem\PayumPaybox\Action\NotifyAction::setApi
      */
-    public function throwIfUnsupportedApiGiven()
+    public function testThrowIfUnsupportedApiGiven()
     {
         $this->expectException(UnsupportedApiException::class);
         $action = new NotifyAction();

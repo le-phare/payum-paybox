@@ -223,9 +223,6 @@ class Api implements LoggerAwareInterface
         return \in_array($httpRequest->clientIp, self::PAYBOX_IP_ADDRESSES, true);
     }
 
-    /**
-     * @return bool
-     */
     private function checkPayboxSignature(GetHttpRequest $httpRequest): bool
     {
         if (false === isset($httpRequest->query['signature'])) {
