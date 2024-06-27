@@ -12,7 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
-use RuntimeException;
 
 class Api implements LoggerAwareInterface
 {
@@ -20,17 +19,17 @@ class Api implements LoggerAwareInterface
     /**
      * Primary server.
      */
-    const MAIN_SERVER = 'tpeweb.paybox.com';
+    public const MAIN_SERVER = 'tpeweb.paybox.com';
 
     /**
      * Backup server.
      */
-    const BACKUP_SERVER = 'tpeweb1.paybox.com';
+    public const BACKUP_SERVER = 'tpeweb1.paybox.com';
 
     /**
      * Sandbox server.
      */
-    const SANDBOX_SERVER = 'preprod-tpeweb.paybox.com';
+    public const SANDBOX_SERVER = 'preprod-tpeweb.paybox.com';
 
     /**
      * @var HttpClientInterface
@@ -47,7 +46,7 @@ class Api implements LoggerAwareInterface
      */
     protected $options = [];
 
-    const PAYBOX_IP_ADDRESSES = [
+    public const PAYBOX_IP_ADDRESSES = [
         // incoming ip addresses
         // pre-production
         '195.101.99.73',
@@ -63,7 +62,7 @@ class Api implements LoggerAwareInterface
         // outgoing ip addresses
         // pre-production
         '195.101.99.76',
-        //production
+        // production
         '194.2.122.158',
         '194.2.122.190',
         '195.25.7.166',
@@ -113,7 +112,7 @@ class Api implements LoggerAwareInterface
      *
      * @return string server url
      *
-     * @throws RuntimeException if no server available
+     * @throws \RuntimeException if no server available
      */
     protected function getApiEndpoint()
     {
@@ -134,7 +133,7 @@ class Api implements LoggerAwareInterface
             }
         }
 
-        throw new RuntimeException('No server available.');
+        throw new \RuntimeException('No server available.');
     }
 
     /**
@@ -244,8 +243,8 @@ class Api implements LoggerAwareInterface
             $signatureInitialized = $signature;
         } else {
             $this->logger->error('Fail to base_decode signature', [
-                    'signature' => $signature,
-                ]);
+                'signature' => $signature,
+            ]);
 
             return false;
         }

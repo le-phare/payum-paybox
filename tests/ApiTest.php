@@ -96,6 +96,7 @@ class ApiTest extends TestCase
 
     /**
      * @covers \Marem\PayumPaybox\Api::checkOriginIpAddress
+     *
      * @dataProvider checkOriginIpAddressProvider
      */
     public function testCheckOriginIpAddress($request, $expected)
@@ -117,7 +118,7 @@ class ApiTest extends TestCase
      */
     public function invokeMethod(&$object, $methodName, array $parameters = [])
     {
-        $reflection = new \ReflectionClass(\get_class($object));
+        $reflection = new \ReflectionClass($object);
         $method = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 
@@ -151,7 +152,7 @@ class ApiTest extends TestCase
             [$ko, false],
             [$okProductionIncoming, true],
         ]
-            ;
+        ;
     }
 
     private function getApiMock(): Api

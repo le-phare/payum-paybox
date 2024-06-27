@@ -10,8 +10,6 @@ use Payum\Core\Request\Cancel;
 class CancelAction extends GatewayAwareAction
 {
     /**
-     * {@inheritdoc}
-     *
      * @param Cancel $request
      */
     public function execute($request): void
@@ -23,14 +21,11 @@ class CancelAction extends GatewayAwareAction
         throw new \LogicException('Not implemented');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof Cancel &&
-            $request->getModel() instanceof \ArrayAccess
+            $request instanceof Cancel
+            && $request->getModel() instanceof \ArrayAccess
         ;
     }
 }

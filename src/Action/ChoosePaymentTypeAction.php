@@ -33,8 +33,6 @@ class ChoosePaymentTypeAction extends GatewayAwareAction implements ApiAwareInte
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param ChoosePaymentType $request
      */
     public function execute($request): void
@@ -46,7 +44,7 @@ class ChoosePaymentTypeAction extends GatewayAwareAction implements ApiAwareInte
         $getHttpRequest = new GetHttpRequest();
         $this->gateway->execute($getHttpRequest);
 
-        /* if form has been submitted, set the payment type and card type to complete the payment details*/
+        /* if form has been submitted, set the payment type and card type to complete the payment details */
         if ('POST' == $getHttpRequest->method && isset($getHttpRequest->request['paymentType'])) {
             $details[PayBoxRequestParams::PBX_TYPEPAIEMENT] = $getHttpRequest->request['paymentType'];
             $details[PayBoxRequestParams::PBX_TYPECARTE] = $getHttpRequest->request['cardType'];
@@ -64,14 +62,11 @@ class ChoosePaymentTypeAction extends GatewayAwareAction implements ApiAwareInte
         throw new HttpResponse($template->getResult());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof ChoosePaymentType &&
-            $request->getModel() instanceof \ArrayAccess
-            ;
+            $request instanceof ChoosePaymentType
+            && $request->getModel() instanceof \ArrayAccess
+        ;
     }
 }

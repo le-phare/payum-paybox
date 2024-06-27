@@ -37,8 +37,6 @@ class NotifyAction implements ApiAwareInterface, ActionInterface, GatewayAwareIn
     /**
      * @See documentation ManuelIntegrationVerifone_PayboxSystem_V8 5.3 Instant Payment Notification
      *
-     * {@inheritdoc}
-     *
      * @param Notify $request
      */
     public function execute($request): void
@@ -84,14 +82,11 @@ class NotifyAction implements ApiAwareInterface, ActionInterface, GatewayAwareIn
         throw new HttpResponse('OK', 200);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof Notify &&
-            $request->getModel() instanceof \ArrayAccess
+            $request instanceof Notify
+            && $request->getModel() instanceof \ArrayAccess
         ;
     }
 
