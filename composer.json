@@ -24,9 +24,10 @@
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^0.12.50",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^8.5 || ^9.0",
+        "php-http/message-factory": "^1.1"
     },
     "autoload": {
         "psr-4": {
@@ -46,10 +47,10 @@
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse -c phpstan.neon",
         "lint:fix": [
-            "vendor/bin/php-cs-fixer --config=.php_cs.dist --verbose fix src client tests"
+            "vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php --verbose fix src client tests"
         ],
         "lint:cs-fixer": [
-            "vendor/bin/php-cs-fixer --config=.php_cs.dist --dry-run --verbose --path-mode=intersection fix src client tests"
+            "vendor/bin/php-cs-fixer --config=.php-cs-fixer.dist.php --dry-run --verbose --path-mode=intersection fix src client tests"
         ],
         "lint": [
             "@analyse",

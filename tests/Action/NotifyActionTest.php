@@ -14,7 +14,6 @@ use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
 use Payum\Core\Tests\GenericActionTest;
 use Psr\Log\LoggerAwareInterface;
-use stdClass;
 
 class NotifyActionTest extends GenericActionTest
 {
@@ -47,14 +46,13 @@ class NotifyActionTest extends GenericActionTest
     }
 
     /**
-     * @test
      * @covers \Marem\PayumPaybox\Action\NotifyAction::setApi
      */
-    public function throwIfUnsupportedApiGiven()
+    public function testThrowIfUnsupportedApiGiven()
     {
         $this->expectException(UnsupportedApiException::class);
         $action = new NotifyAction();
-        $action->setApi(new stdClass());
+        $action->setApi(new \stdClass());
     }
 
     /**

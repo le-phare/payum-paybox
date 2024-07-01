@@ -9,25 +9,23 @@ use Payum\Core\Request\GetStatusInterface;
 
 class StatusAction implements ActionInterface
 {
-    const SUCCESS = '00000';
+    public const SUCCESS = '00000';
 
-    const CONTACT_CARD_OWNER = '01';
+    public const CONTACT_CARD_OWNER = '01';
 
-    const INVALID_TRANSACTION = '12';
+    public const INVALID_TRANSACTION = '12';
 
-    const INVALID_AMOUNT = '13';
+    public const INVALID_AMOUNT = '13';
 
-    const INVALID_HOLDER_NUMBER = '14';
+    public const INVALID_HOLDER_NUMBER = '14';
 
-    const CUSTOM_CANCELATION = '17';
+    public const CUSTOM_CANCELATION = '17';
 
-    const RETRY_LATER = '19';
+    public const RETRY_LATER = '19';
 
-    const EXPIRED_CARD = '33';
+    public const EXPIRED_CARD = '33';
 
     /**
-     * {@inheritdoc}
-     *
      * @param GetStatusInterface $request
      */
     public function execute($request): void
@@ -51,14 +49,11 @@ class StatusAction implements ActionInterface
         $request->markFailed();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof GetStatusInterface &&
-            $request->getModel() instanceof \ArrayAccess
+            $request instanceof GetStatusInterface
+            && $request->getModel() instanceof \ArrayAccess
         ;
     }
 }

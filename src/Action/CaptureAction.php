@@ -23,8 +23,6 @@ class CaptureAction extends GatewayAwareAction implements ApiAwareInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param Capture $request
      */
     public function execute($request): void
@@ -51,14 +49,11 @@ class CaptureAction extends GatewayAwareAction implements ApiAwareInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof Capture &&
-            $request->getModel() instanceof \ArrayAccess
+            $request instanceof Capture
+            && $request->getModel() instanceof \ArrayAccess
         ;
     }
 }

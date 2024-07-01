@@ -10,8 +10,6 @@ use Payum\Core\Request\Refund;
 class RefundAction extends GatewayAwareAction
 {
     /**
-     * {@inheritdoc}
-     *
      * @param Refund $request
      */
     public function execute($request): void
@@ -23,14 +21,11 @@ class RefundAction extends GatewayAwareAction
         throw new \LogicException('Not implemented');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof Refund &&
-            $request->getModel() instanceof \ArrayAccess
+            $request instanceof Refund
+            && $request->getModel() instanceof \ArrayAccess
         ;
     }
 }

@@ -17,8 +17,6 @@ class ConvertPaymentAction extends ApiLoggerAwareAction implements ActionInterfa
     use GenericTokenFactoryAwareTrait;
 
     /**
-     * {@inheritdoc}
-     *
      * @param Convert $request
      */
     public function execute($request): void
@@ -30,7 +28,7 @@ class ConvertPaymentAction extends ApiLoggerAwareAction implements ActionInterfa
 
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
         $details[PayBoxRequestParams::PBX_TOTAL] = $payment->getTotalAmount();
-        //TODO : dynamise currency code.
+        // TODO : dynamise currency code.
         $details[PayBoxRequestParams::PBX_DEVISE] = '978';
         $details[PayBoxRequestParams::PBX_CMD] = $payment->getNumber();
         $details[PayBoxRequestParams::PBX_PORTEUR] = $payment->getClientEmail();
@@ -53,15 +51,12 @@ class ConvertPaymentAction extends ApiLoggerAwareAction implements ActionInterfa
         $request->setResult((array) $details);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request)
     {
         return
-            $request instanceof Convert &&
-            $request->getSource() instanceof PaymentInterface &&
-            'array' === $request->getTo()
+            $request instanceof Convert
+            && $request->getSource() instanceof PaymentInterface
+            && 'array' === $request->getTo()
         ;
     }
 }
