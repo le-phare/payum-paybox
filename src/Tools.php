@@ -20,7 +20,7 @@ class Tools
         $result = [];
 
         foreach ($array as $key => $value) {
-            $result[] = sprintf('%s=%s', $key, $value);
+            $result[] = \sprintf('%s=%s', $key, $value);
         }
 
         return implode('&', $result);

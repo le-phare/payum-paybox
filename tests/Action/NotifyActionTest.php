@@ -65,7 +65,7 @@ class NotifyActionTest extends GenericActionTest
             ->expects(self::once())
             ->method('execute')
             ->with(self::isInstanceOf(GetHttpRequest::class))
-            ->willReturnCallback(function (GetHttpRequest $request) {
+            ->willReturnCallback(static function (GetHttpRequest $request) {
                 $request->query = [
                     'amount' => 100,
                     'authorization_number' => 'XXXXX',
@@ -107,7 +107,7 @@ class NotifyActionTest extends GenericActionTest
             ->expects(self::once())
             ->method('execute')
             ->with(self::isInstanceOf(GetHttpRequest::class))
-            ->willReturnCallback(function (GetHttpRequest $request) {
+            ->willReturnCallback(static function (GetHttpRequest $request) {
                 $request->query = ['amount' => 100];
             })
         ;
@@ -147,7 +147,7 @@ class NotifyActionTest extends GenericActionTest
             ->expects(self::once())
             ->method('execute')
             ->with(self::isInstanceOf(GetHttpRequest::class))
-            ->willReturnCallback(function (GetHttpRequest $request) {
+            ->willReturnCallback(static function (GetHttpRequest $request) {
                 $request->query = ['amount' => 100];
             })
         ;
@@ -184,7 +184,7 @@ class NotifyActionTest extends GenericActionTest
             ->expects(self::once())
             ->method('execute')
             ->with(self::isInstanceOf(GetHttpRequest::class))
-            ->willReturnCallback(function (GetHttpRequest $request) {
+            ->willReturnCallback(static function (GetHttpRequest $request) {
                 $request->query = [
                     'amount' => 100,
                     'authorization_number' => 'XXXXX',
@@ -226,7 +226,7 @@ class NotifyActionTest extends GenericActionTest
             ->expects(self::once())
             ->method('execute')
             ->with(self::isInstanceOf(GetHttpRequest::class))
-            ->willReturnCallback(function (GetHttpRequest $request) {
+            ->willReturnCallback(static function (GetHttpRequest $request) {
                 $request->query = [
                     'amount' => 100,
                     'authorization_number' => 'XXXXX',
@@ -268,7 +268,7 @@ class NotifyActionTest extends GenericActionTest
             ->expects(self::once())
             ->method('execute')
             ->with(self::isInstanceOf(GetHttpRequest::class))
-            ->willReturnCallback(function (GetHttpRequest $request) {
+            ->willReturnCallback(static function (GetHttpRequest $request) {
                 $request->query = [
                     'amount' => 100,
                     'authorization_number' => 'XXXXX',

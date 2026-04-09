@@ -48,6 +48,7 @@ class Api implements LoggerAwareInterface
 
     /**
      * @var string[]
+     *
      * @see https://www.paybox.com/espace-integrateur-documentation/la-solution-paybox-system/urls-dappels-et-adresses-ip/
      */
     public const PAYBOX_IP_ADDRESSES = [
@@ -142,7 +143,7 @@ class Api implements LoggerAwareInterface
      */
     public function getAuthorizeTokenUrl()
     {
-        return sprintf(
+        return \sprintf(
             'https://%s/cgi/MYchoix_pagepaiement.cgi',
             $this->getApiEndpoint()
         );
@@ -275,7 +276,7 @@ class Api implements LoggerAwareInterface
         ]);
 
         /** @var array $arrayDataExcludingSignature Signed data */
-        $arrayDataExcludingSignature = array_filter($httpRequest->query, function ($value, $key) {
+        $arrayDataExcludingSignature = array_filter($httpRequest->query, static function ($value, $key) {
             return 'signature' !== $key;
         }, \ARRAY_FILTER_USE_BOTH);
         $this->logger->debug('[Paybox] arrayDataExcludingSignature', [
