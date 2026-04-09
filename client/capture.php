@@ -1,6 +1,6 @@
 <?php
 
-//capture.php
+// capture.php
 
 use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Reply\ReplyInterface;
@@ -29,5 +29,5 @@ try {
 
     exit;
 } catch (ReplyInterface $reply) {
-    throw new \LogicException('Unsupported reply', null, $reply);
+    throw new LogicException('Unsupported reply', null, $reply);
 }
