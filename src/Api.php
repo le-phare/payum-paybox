@@ -143,7 +143,7 @@ class Api implements LoggerAwareInterface
      */
     public function getAuthorizeTokenUrl()
     {
-        return \sprintf(
+        return sprintf(
             'https://%s/cgi/MYchoix_pagepaiement.cgi',
             $this->getApiEndpoint()
         );

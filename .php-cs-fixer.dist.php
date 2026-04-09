@@ -15,6 +15,7 @@ return (new PhpCsFixer\Config())
         'protected_to_private' => false,
         'native_constant_invocation' => true,
         'combine_nested_dirname' => true,
+        'native_function_invocation' => false,
     ])
     ->setRiskyAllowed(true)
     ->setFinder(
