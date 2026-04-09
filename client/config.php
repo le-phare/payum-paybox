@@ -1,6 +1,6 @@
 <?php
 
-//config.php
+// config.php
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -22,8 +22,8 @@ $config = [
 /** @var Payum $payum */
 $payum = (new PayumBuilder())
     ->addDefaultStorages()
-    ->addGatewayFactory('paybox', function (array $config, GatewayFactoryInterface $coreGatewayFactory) use ($config) {
-        return new \Marem\PayumPaybox\PayboxGatewayFactory($config, $coreGatewayFactory);
+    ->addGatewayFactory('paybox', static function (array $config, GatewayFactoryInterface $coreGatewayFactory) use ($config) {
+        return new Marem\PayumPaybox\PayboxGatewayFactory($config, $coreGatewayFactory);
     })
     ->addGateway('paybox', [
         'factory' => 'paybox',
