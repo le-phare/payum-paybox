@@ -46,26 +46,27 @@ class Api implements LoggerAwareInterface
      */
     protected $options = [];
 
+    /**
+     * @var string[]
+     * @see https://www.paybox.com/espace-integrateur-documentation/la-solution-paybox-system/urls-dappels-et-adresses-ip/
+     */
     public const PAYBOX_IP_ADDRESSES = [
         // incoming ip addresses
         // pre-production
-        '195.101.99.73',
+        '195.25.7.146',
         // production
-        '194.2.160.66',
         '194.2.160.80',
         '194.2.160.82',
         '194.2.160.91',
-        '195.25.7.146',
         '195.25.67.0',
         '195.25.67.2',
         '195.25.67.11',
         // outgoing ip addresses
-        // pre-production
-        '195.101.99.76',
         // production
-        '194.2.122.158',
+        '62.161.13.193',
+        '62.161.15.193',
         '194.2.122.190',
-        '195.25.7.166',
+        // preprod and prod soon to be removed
         '195.25.67.22',
     ];
 
