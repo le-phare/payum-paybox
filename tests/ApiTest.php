@@ -141,11 +141,11 @@ class ApiTest extends TestCase
     public function checkOriginIpAddressProvider()
     {
         $okPreprodIncoming = new GetHttpRequest();
-        $okPreprodIncoming->clientIp = '195.101.99.73';
+        $okPreprodIncoming->clientIp = '195.25.67.22';
         $ko = new GetHttpRequest();
         $ko->clientIp = '192.101.99.73';
         $okProductionIncoming = new GetHttpRequest();
-        $okProductionIncoming->clientIp = '194.2.160.91';
+        $okProductionIncoming->clientIp = '62.161.13.193';
 
         return [
             [$okPreprodIncoming, true],
