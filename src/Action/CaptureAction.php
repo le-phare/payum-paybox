@@ -43,13 +43,20 @@ class CaptureAction extends GatewayAwareAction implements ApiAwareInterface
         $this->gateway->execute($httpRequest);
 
         if (isset($httpRequest->query['error_code'])) {
-            // An unsigned return is left aside: the payment stays pending until Paybox's notification
-            if ($this->api->hasValidSignature($httpRequest)) {
+            // An unsigned return, or the signed return of another payment, is left aside: the payment stays pending until Paybox's notification
+            if ($this->isReturnOf($details, $httpRequest) && $this->api->hasValidSignature($httpRequest)) {
                 $details->replace($httpRequest->query);
             }
         } else {
             $this->api->doPayment((array) $details);
         }
+    }
+
+    private function isReturnOf(ArrayObject $details, GetHttpRequest $httpRequest): bool
+    {
+        return isset($details[PayBoxRequestParams::PBX_CMD], $details[PayBoxRequestParams::PBX_TOTAL])
+            && (string) $details[PayBoxRequestParams::PBX_CMD] === (string) ($httpRequest->query['reference'] ?? '')
+            && (string) $details[PayBoxRequestParams::PBX_TOTAL] === (string) ($httpRequest->query['amount'] ?? '');
     }
 
     public function supports($request)
