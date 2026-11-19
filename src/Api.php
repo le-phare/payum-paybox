@@ -185,10 +185,18 @@ class Api implements LoggerAwareInterface
         if (false === $this->doesTheResponseReallyComeFromPaybox($httpRequest)) {
             $message = 'Notification invalid: the response doesn\'t come from Paybox.';
             $this->logger->error($message, $context);
-            throw new HttpResponse($message);
+            throw new HttpResponse($message, 400);
         }
 
         return true;
+    }
+
+    /**
+     * The customer's browser brings the payment return back: its IP address is not Paybox's, only its signature can be checked.
+     */
+    public function hasValidSignature(GetHttpRequest $httpRequest): bool
+    {
+        return $this->checkPayboxSignature($httpRequest);
     }
 
     /**

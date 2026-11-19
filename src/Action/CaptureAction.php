@@ -43,7 +43,10 @@ class CaptureAction extends GatewayAwareAction implements ApiAwareInterface
         $this->gateway->execute($httpRequest);
 
         if (isset($httpRequest->query['error_code'])) {
-            $details->replace($httpRequest->query);
+            // An unsigned return is left aside: the payment stays pending until Paybox's notification
+            if ($this->api->hasValidSignature($httpRequest)) {
+                $details->replace($httpRequest->query);
+            }
         } else {
             $this->api->doPayment((array) $details);
         }

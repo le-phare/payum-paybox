@@ -5,6 +5,7 @@ namespace Marem\PayumPaybox\Tests;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Marem\PayumPaybox\Api;
 use Payum\Core\HttpClientInterface;
+use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Request\GetHttpRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -92,6 +93,42 @@ class ApiTest extends TestCase
             'card_type' => 'Maestro',
         ];
         self::assertFalse($this->invokeMethod($api, 'checkPayboxSignature', [$httpRequest]), 'verify should return false cuz a query param changed');
+    }
+
+    public function testHasValidSignatureIgnoresTheClientIpAddress()
+    {
+        $httpRequest = new GetHttpRequest();
+        $httpRequest->clientIp = '192.101.99.73';
+        $httpRequest->query = [
+            'amount' => '22000',
+            'reference' => 'CLI_5193_CDEW_5f918e4a5f1e2_394',
+            'authorization_number' => 'XXXXXX',
+            'error_code' => '00000',
+            'card_type' => 'Maestro',
+            'signature' => 'OOB5pT29r2GqsDOGyRktSB3AXdFSDOzIUihXNchZOjxOPgAbCpK0CVdD+NKtfEmsSjInY35bZ2A0nb5qCLKprZWRuGIbjgUrhHymm9tL/jfieE0x/4i7+QqI1ZY/TDQT+wsQ5eEJA+2AHOzZPcWHKekjuTC+nhhQBQqHuolV9vo=',
+        ];
+
+        self::assertTrue($this->getApiMock()->hasValidSignature($httpRequest));
+    }
+
+    public function testVerifyRefusesAnUnsignedNotificationWithA400()
+    {
+        $httpRequest = new GetHttpRequest();
+        $httpRequest->clientIp = '62.161.13.193';
+        $httpRequest->query = [
+            'amount' => '22000',
+            'error_code' => '00000',
+        ];
+
+        try {
+            $this->getApiMock()->verify($httpRequest);
+        } catch (HttpResponse $reply) {
+            self::assertSame(400, $reply->getStatusCode());
+
+            return;
+        }
+
+        self::fail('The notification should be refused');
     }
 
     /**
